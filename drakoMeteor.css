@@ -1,0 +1,26 @@
+/* CSS declarations go here */
+
+
+.overlay-right {
+  position: absolute;right: 0;width: calc(50% - 50px); height: calc(100% - 131px);
+}
+
+.overlay-left {
+  position: absolute; left: 0;width: calc(50% - 50px); height: calc(100% - 180px);
+}
+
+.overlay-bottom {
+  position: absolute; width: calc(100% - 115px); height: calc(50% - 50px);bottom: 30px;
+}
+
+.overlay-wrench {
+  position: absolute; background: rgba(0, 0, 0, 0.3);width: 28px; height: 27px;bottom: 1px;right: 28px;
+}
+
+.overlay-bottom-right {
+  position: absolute; width: 43px; height: 103px;bottom: 28px;right: 0;
+}
+
+.overlay-top {
+  position: absolute; width: 100%; height: calc(50% - 51px);top: 0;
+}

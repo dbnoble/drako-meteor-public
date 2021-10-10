@@ -1,0 +1,99 @@
+<template name="flipper_front">
+    <div class="flipHeader">
+  {{#if activeEvents.count}}
+  <div class="flipButton animated fadeIn">
+    <i class="fa fa-cogs flipIcon"></i>
+  </div>
+  {{else}}
+  <div class="flipButton sb-toggle-right">
+    <i class="fa fa-cogs flipIcon"></i>
+  </div>
+  {{/if}}
+  </div>
+  <div id="emoteBoxWrapper">
+  {{> emoteBox}}
+  </div>
+  <div id="settingsBoxWrapper">
+  {{> settingsBox}}
+  </div>
+  <div id="morechat">
+    New Chat Messages Below
+  </div>
+  {{> customchat}}
+    {{#if currentUser}}
+  {{> authenticatedchat}}
+  {{else}}
+  {{> anonymouschat}}
+  {{/if}}
+</template>
+<template name="flipper_back">
+  {{#if currentUser}}
+  <div id="flipBody">
+      <div class="btn-group btn-group-justified" role="group" aria-label="">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnav" id="profileSw" data-target="#profileTab" aria-controls="profileTab" role="tab" data-toggle="tab"><i class="fa fa-user"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnav" data-target="#bettingTab" aria-controls="bettingTab" role="tab" data-toggle="tab"><i class="fa fa-money"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnav" data-target="#auctionTab" aria-controls="auctionTab" role="tab" data-toggle="tab"><i class="fa fa-gavel"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnav" data-target="#pollTab" aria-controls="pollTab" role="tab" data-toggle="tab"><i class="fa fa-ticket"></i></button>
+        </div>
+        {{#if isAdmin}}
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnav" data-target="#adminTab" aria-controls="adminTab" role="tab" data-toggle="tab"><i class="fa fa-key fa-flip-vertical"></i></button>
+        </div>
+        {{/if}}
+        <div class="btn-group" role="group">
+          <button id="flipBack" type="button" class="btn flipnav sb-toggle-right"><i class="fa fa-comment"></i></button>
+        </div>
+      </div>
+  {{> tabholder}}
+  </div>
+  {{else}}
+  <div style="width:100%; height:100%; padding: 20px;">
+    <div class="flippinCray" style="align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center; padding-left:30px; padding-right:30px;"><div><h3 style="font-weight:bolder;color:#D3D3D3;margin-bottom:20px;">Sign In To Earn More Points &amp; Participate In Stream Events!</h3>{{> loginButtons}}<br><br><a style="color: #777777;margin-top:20px;" href="#" id="flipBack" class="sb-toggle-right">or, go back to chat.</a></div></div>
+  </div>
+  {{/if}}
+</template>
+
+<template name="flipper">
+<div class="cardWrapper">
+  <div class="card">
+    <div class="cardFace front">{{> flipper_front}}</div>
+    <div class="cardFace back"></div>
+  </div>
+</div>
+</template>
+
+<template name="flipnav">
+
+</template>
+
+<template name="flipbody">
+
+</template>
+
+<template name="tabholder">
+  <div role="tabpanel" class="flipTabs" style="overflow-x:auto; max-height:calc(100vh - 90px);">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade flipTab" id="profileTab" style="padding:0;">{{> profilecontainer}}</div>
+    <div role="tabpanel" class="tab-pane fade in flipTab active" id="bettingTab">{{> userbettingtab}}</div>
+    <div role="tabpanel" class="tab-pane fade flipTab" id="auctionTab"><hr><h2 style="text-align:center;">AUCTIONS</h2><hr><h3 style="text-align:center;">Coming Soon!</h3></div>
+    <div role="tabpanel" class="tab-pane fade flipTab" id="pollTab">{{> userraffletab}}</div>
+    {{#if isAdmin}}<div role="tabpanel" class="tab-pane fade flipTabAdmin" id="adminTab">{{> admintab}}</div>{{/if}}
+  </div>
+
+</div>
+</template>
+
+
+
+
+

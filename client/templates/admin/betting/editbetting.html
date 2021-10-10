@@ -1,0 +1,65 @@
+<template name="editbetting">
+  <h1 style="text-align:center; margin-top:10px">EDIT BETTING</h1>
+  <hr style="margin-top:0;">
+  {{#if betrounds.count}}
+  {{#each betrounds}}
+  <p style="font-size:18px;">{{challenge}}</p>
+  {{#if live}}
+  <ul>
+  {{#each options}}
+        <li>{{optionText}}<br><span style="font-size:smaller;">Wagered: {{optionPool}} Scales</span></li>
+  {{/each}}
+    </ul>
+  {{else}}
+  <h3>Select Winning Option:</h3>
+  <div id="selectWinner">
+  {{#each options}}
+<div class="radio">
+  <label>
+    <input type="radio" class="radio winningOption" name="radioOptions" value="{{optionId}}">
+    {{optionText}} <br><span style="font-size:smaller;">Wagered: {{optionPool}} Scales</span>
+  </label>
+</div>
+  {{/each}}
+  </div>
+  {{/if}}
+  {{#if live}}
+  <div style="text-align:center; margin-bottom:10px;"><strong>BETTING IS <span style="color: #5cb85c;">OPEN</span></strong></div>
+  <hr>
+  <button type="button" id="closeRound" class="btn btn-danger" style="width:100%">Close Betting</button>
+  {{else}}
+  <div style="text-align:center; margin-bottom:10px"><strong>BETTING IS <span style="color: #d9534f;">CLOSED</span></strong></div>
+  <hr>
+  <button type="button" id="awardWinners" class="btn btn-success" style="width:100%">Award Winners</button>
+  {{/if}}
+  {{/each}}
+  {{else}}
+    <div class="control-group" id="fields">
+      <div class="form-group">
+    <label for="betQuestion">Betting Challenge/Question</label>
+    <textarea class="form-control" id="betQuestion" rows="3" placeholder="Ex: Will Drako eat his shoe?"></textarea>
+  </div>
+            <label class="control-label" for="field1">Bet Options</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+                    <div class="entry bet-entry col-xs-12" style="margin-bottom:10px; padding-left:0; padding-right:0;">
+                        <input class="form-control betOption" name="betOption[]" type="text" placeholder="Enter first option" />
+                    </div><br>
+                    <div class="entry bet-entry cloner bet-cloner input-group col-xs-12" style="margin-bottom:10px;">
+                        <input class="form-control betOption" name="betOption[]" type="text" placeholder="Enter another option" />
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add btn-add-betOption" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                  <hr>
+                  <p><strong>WARNING: </strong>You will not be able to edit these details once you have started the round. Please make sure all the details you have entered are correct before continuing.</p>
+                  <hr>
+                  <button type="button" id="submitNewRound" class="btn btn-success" style="width:100%; margin-bottom:10px;">Start Betting Round</button>
+                  <button type="button" id="clearRoundFields" class="btn btn-danger" style="width:100%">Cancel</button>
+                </form>
+            </div>
+        </div>
+  {{/if}}
+</template>

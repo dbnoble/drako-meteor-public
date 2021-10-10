@@ -1,0 +1,19 @@
+<template name="setColor">
+    <div class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog set-color-dialog">
+            <div class="modal-content set-color-content">
+                <div class="modal-body set-color">
+                  <h2>Colorizer5000</h2>
+                  <hr />
+                  <div id="color-preview">{{currentUser.profile.display_name}}</div>
+                    <div class="slider">
+  <input id="slidey" type = "range" min="0" max="360"/>
+  </div>
+                  Drag the slider to choose your name color.<br>
+                  Color will be applied to new messages you send.<br><br>
+                  <center><button type="button" id="saveColor" class="btn btn-default">Save Color</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

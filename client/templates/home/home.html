@@ -1,0 +1,19 @@
+<template name="home">
+  {{#Surface}}
+  <div class="homeContainer">
+    <div class="centerHolder">
+      <img src="https://s3.amazonaws.com/drakogaming/nostrokemdDark.png" alt="Drako_Gaming" width="334">
+      {{#if stream.live}}
+      <style>.dot{ background-color: #00ff00; box-shadow: 0px 0px 10px 2px green; }</style>
+      <a href="/watch"><img src="https://s3.amazonaws.com/drakogaming/drakoOnline.png" alt="Drako is Online" width="334"></a>
+      {{else}}
+      <a href="/watch"><img src="https://s3.amazonaws.com/drakogaming/drakoOffline.png" alt="Drako is Offline" width="334"></a>
+      <style>.dot{ background-color: #ff0000; box-shadow: 0px 0px 10px 2px red; }</style>
+      {{/if}}
+    </div>
+  </div>
+  {{/Surface}}
+  {{doAwesome}}
+</template>
+
+

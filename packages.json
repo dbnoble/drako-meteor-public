@@ -1,0 +1,5 @@
+{
+  "twitch-irc": "1.2.7",
+  "tmi.js": "0.0.23",
+  "browserify-shim": "3.8.11"
+}

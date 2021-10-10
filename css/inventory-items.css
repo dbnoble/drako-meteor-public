@@ -1,0 +1,39 @@
+.empty-flask{
+  background-image: url("big_empty.png");
+  background-size: contain;
+}
+.black-bottle{
+  background-image: url("middle_black.png");
+  background-size: contain;
+}
+.black-vial{
+  background-image: url("small_black.png");
+  background-size: contain;
+}
+.black-flask{
+  background-image: url("big_black.png");
+  background-size: contain;
+}
+.coal{
+  background-image: url("coal.png");
+  background-size: contain;
+}
+.stick{
+  background-image: url("wood.png");
+  background-size: contain;
+}
+.cheese{
+  background-image: url("cheese.png");
+  background-size: contain;
+}
+.recipe{
+  background-image: url("recipe.png");
+  background-size: contain;
+}
+#itemResult {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 56px;
+  right: 12px;
+}

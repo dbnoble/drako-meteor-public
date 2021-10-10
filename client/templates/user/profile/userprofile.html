@@ -1,0 +1,116 @@
+<template name="profilecontainer">
+  {{> profiletabnav}}
+  {{> profiletabholder}}
+</template>
+
+<template name="detailstab">
+{{> scorecard}}
+{{> badges}}
+</template>
+
+<template name="profiletabnav">
+      <div class="btn-group btn-group-justified" role="group" aria-label="">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavProfile" data-target="#detailsTab" aria-controls="detailsTab" role="tab" data-toggle="tab">CHARACTER</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="doIt" class="btn flipnavProfile" data-target="#inventoryTab" aria-controls="inventoryTab" role="tab" data-toggle="tab">INVENTORY</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavProfile" data-target="#settingsTab" aria-controls="settingsTab" role="tab" data-toggle="tab">SETTINGS</button>
+        </div>
+      </div>
+</template>
+
+<template name="profiletabholder">
+  <div role="tabpanel" class="flipTabs" style="overflow-x: hidden; overflow-y: auto; height:calc(100vh - 130px); padding: 0;">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in flipTabCover active" id="detailsTab">{{> detailstab}}</div>
+      <div role="tabpanel" class="tab-pane fade flipTabCover" id="inventoryTab">
+        {{> preshow}}
+        {{gridInit}}
+      </div>
+      <div role="tabpanel" class="tab-pane fade flipTabCover" id="settingsTab">
+        {{> settingstab}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="settingstab">
+  <div style="padding: 5px; height:100%; width:100%;">
+    <h2 style="text-align:center;"><strong>Settings</strong></h2>
+    <hr>
+  <label class="checkbox-inline">
+          <input type="checkbox" id="hostModeCheckBox" value="hostMode" {{getHostMode}}> Host Mode
+        </label>
+  </div>
+</template>
+
+<template name="scorecard">
+    <div id='scorecard'>
+				<div id='icon' style="background-image:url({{avatar}}); background-size:cover;"></div>
+				<h2 style="margin-top:0; margin-bottom:0;">{{currentUser.display_name}}</h2>
+				Level {{levelData.currentLev}} <br/>
+				{{currentUser.rank}}<br/>
+        {{#if currentUser.path}}{{currentUser.path}}{{else}}Path Unclear{{/if}}<br/>
+
+				<div class='score'>
+					{{currentUser.exp}} Experience<br/>
+					XP until next level: {{levelData.expToLevel}} <br/>
+			    Progress towards next level: {{levelData.progress.short}}% <br/>
+				</div>
+				<progress class="level" max="100" value="{{levelData.progress.long}}"></progress>
+				
+			</div>
+</template>
+
+<template name="badges">
+  <div id="badgesContainer">
+  {{#each badges}}
+  <div class="badgeSingle" data-toggle="tooltip" data-placement="auto top" title="{{description}}">
+    <img src="{{image}}" />
+  </div>
+  {{/each}}
+  </div>
+</template>
+
+<template name="preshvvow">
+    <div id="preShow" style="position:absolute;top:-1000px;left:-1000px;visibility:hidden;">
+    <div id="crafting" class="crafting">
+    </div>
+      
+      <div id="inventory" class="inventory">
+        {{#each inventory}}
+        <div data-item-handle="{{slug}}" class="inventory-item ss-active-child {{itemClass}}">
+          <span class="inventory-item-count">
+            {{qty}}
+          </span>
+      </div>
+     {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="keychain">
+  <h2>Keychain</h2>
+  {{#if keychain.count}}
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+  {{/if}}
+  <hr>
+</template>

@@ -1,0 +1,46 @@
+<template name="userraffletab">
+{{#if rafflerounds.count}}
+  <hr>
+  {{#each rafflerounds}}
+  {{#if live}}
+  <h2 style="text-align:center;"><strong>RAFFLE IS <span style="color: #5cb85c;">OPEN</span></strong></h2> 
+  {{else}}
+  <h2 style="text-align:center;"><strong>RAFFLE <span style="color: #d9534f;">CLOSED</span></strong></h2>
+  {{/if}}
+  <hr>
+  <div class="prizePool"><span style="position:absolute; font-size: 10px; top: 5px; text-align:center; width:100%;">R A F F L E</span>
+    <span style="position:absolute; top: 30px; font-size:72px;text-align:center;width:100%;">{{raffleEntries}}</span>
+  <span style="position:absolute; font-size: 14px; bottom: 10px; text-align:center; width:100%;">E&nbsp;&nbsp;N&nbsp;&nbsp;T&nbsp;&nbsp;R&nbsp;&nbsp;I&nbsp;&nbsp;E&nbsp;&nbsp;S</span></div>
+  <strong>Prize: </strong> {{prize}}<br><br>
+  <strong>Cost per entry: </strong> {{cost}} scales<br><br>
+  <center><strong>You have entered {{userEntries}} times</strong></center>
+  {{#if live}}
+  <center><hr>
+  {{#if enoughCurrency}}  
+  <button type="button" id="enterRaffle" class="btn btn-lg btn-default">Enter Raffle</button>
+  <button type="button" id="enteringRaffle" class="btn btn-lg btn-warning" style="display:none;">Processing Entry...</button>
+  {{else}}
+  <button type="button" id="cantAfford" class="btn btn-lg btn-danger">Not enough scales!</button>
+  {{/if}}
+  </center>
+  {{else}}
+  <h2 style="text-align:center;"><strong><span style="color: #5cb85c;">GOOD LUCK!</span></strong></h2> 
+  {{/if}}
+ {{/each}}
+  {{else}}
+   <div style="text-align:center;">
+  <h2>No Active Raffles</h2><hr><h4>Come back during the next round!</h4>
+    </div>
+  {{#each completeRaffles}}
+  <hr>
+    <h3>Last Raffle Results</h3><br>
+    <p style="font-size:18px;">Prize: {{prize}}</p>
+  <br>
+  <p style="font-size:18px;">Congratulations winner(s):<br> 
+    {{#each raffleWinners}}
+    {{displayName}}<br>
+    {{/each}}
+  </p>
+  {{/each}}
+  {{/if}}
+</template>

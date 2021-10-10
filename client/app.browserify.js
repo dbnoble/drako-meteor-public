@@ -1,0 +1,1 @@
+tmi = require('tmi.js');

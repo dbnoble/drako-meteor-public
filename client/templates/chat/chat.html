@@ -1,0 +1,80 @@
+<template name="clrchat">
+  <div id="chat-wrapper" class="clr scrollbar-macosx scrollbar-chat">
+    <div id="chat" class="clr">
+      <div id="anonymous-blocker"></div>
+    </div>
+  </div> 
+</template>
+
+<template name="customchat">
+  <div id="chat-wrapper" class="scrollbar-macosx scrollbar-chat">
+    <div id="chat">
+      <div id="anonymous-blocker"></div>
+    </div>
+  </div>
+</template>
+
+<template name="anonymouschat">
+<div id="msgInputWrapper" style="text-align:center; color: #fff;">
+  <h4 style="margin-top:0">Log in to chat!</h4>
+  {{> loginButtons}}
+</div>
+</template>
+
+<template name="authenticatedchat">
+  <div id="authenticated-blocker"></div>
+  <div id="msgInputWrapper">
+    <textarea id="messageInput" placeholder="Send a message" maxlength="500"></textarea>
+    <div id="chat-buttons">
+      <div id="emoteButtonWrapper">
+        <i class="fa fa-smile-o"></i>
+      </div>
+      <div id="chatSettingsButtonWrapper">
+        <div id="chatSettingsSlideWrapper">
+          <div id="chatSettingsActiveButton">
+            <i style="line-height: 28px!important;" class="fa fa-cog"></i>
+          </div>
+          <div id="sendActiveButton">
+            <i style="line-height: 27px!important;" class="fa fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="emoteBox">
+<div id="emoteBox">
+  {{#each emotes}}
+        {{> emoteItem}}
+     {{/each}}
+</div>
+</template>
+
+<template name="settingsBox">
+<div id="settingsBox">
+  Highlight Words
+  <textarea id="highlightInput" placeholder="Words to highlight (space separated)">{{getValue}}</textarea>
+  <hr>
+  <div class="checkbox">
+  <label style="line-height:20px">
+    <input id="timestampHide" type="checkbox" value="" {{checked 'timestampHide'}}>
+    Hide Timestamps
+  </label>
+</div>
+<div class="checkbox">
+  <label style="line-height:20px">
+    <input id="glowHide" type="checkbox" value="" {{checked 'glowHide'}}>
+    Hide Glow (takes effect on future chat)
+  </label>
+</div>
+  <hr>
+  <div class="right-align-wrap"><span id="theaterMode">Theater Mode [off]</span></div>
+</div>
+</template>
+
+<template name="emoteItem">
+  <div class="emote-item" data-keyword="{{keyword}}" data-type="{{type}}">
+    <img class="emote-preview" src="{{image}}">
+  </div>
+</template>

@@ -1,0 +1,258 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link href="favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <title>Drako Gaming</title>
+  <style>
+   .login-display-name {
+     display:none !important;
+   } 
+  </style>
+</head>
+
+<body class="vbox viewport">
+</body>
+  
+<template name="defaultLayout">
+  <header>{{> navigation}}</header>
+  {{> Template.dynamic template=main}}
+  <div id="currencyChange"></div>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=556076674508711&ev=PageView&noscript=1"
+/></noscript>
+</template>
+
+<template name="streamEventsLayout">
+  {{> Template.dynamic template=main}}
+</template>
+
+<template name="mobilelayout">
+
+  <header>{{> mobilenavigation}}</header>
+  {{> Template.dynamic template=main}}
+  <footer>{{> mobilefooter}}</footer>
+</template>
+
+<template name="chatlayout">
+  {{> Template.dynamic template=main}}
+</template>
+
+<template name="layout">
+  {{> effectWrapper}}
+  <div id="sb-site">
+    <div id="currencyChange"></div>
+    {{#famousContext id="mainCtx"}}
+    {{#HeaderFooterLayout headerSize="50" footerSize="0"}}
+
+    {{#Surface target="header" translate="[0,0,100]"}}
+    <div id="header">{{> navigation}}</div>
+    {{/Surface}}
+
+
+    {{#RenderController target="content"}}
+    <div id="content">{{> Template.dynamic template=main}}</div>
+    {{/RenderController}}
+
+    {{/HeaderFooterLayout}}
+    {{/famousContext}}
+  </div>
+  <div class="sb-slidebar sb-right sb-style-overlay sb-header-adjusted sb-width-custom" data-sb-width="400px">
+    {{> sidebar}}
+  </div>
+  {{> contextMenu}}
+</template>
+
+<template name="contextMenu">
+  <div id="context-menu">
+      <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header">[User]</li>
+        <li role="separator" class="divider"></li>
+        <li><a data-cmd="mention" tabindex="-1" href="#">Mention</a></li>
+        <li><a data-cmd="whisper" tabindex="-1" href="#">Whisper</a></li>
+        <li><a data-cmd="poke" tabindex="-1" href="#">Poke</a></li>
+        {{#if isMod}}
+        <li><a data-cmd="permit" tabindex="-1" href="#">!Permit</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a data-cmd="timeout" data-length="1" tabindex="-1" href="#">Purge</a></li>
+        <li class="dropdown-submenu">
+          <a tabindex="-1" href="#">Timeout</a>
+          <ul class="dropdown-menu">
+            <li><a data-cmd="timeout" data-length="60" tabindex="-1" href="#">1 minute</a></li>
+            <li><a data-cmd="timeout" data-length="300" href="#">5 minutes</a></li>
+            <li><a data-cmd="timeout" data-length="600" href="#">10 minutes</a></li>
+            <li><a data-cmd="timeout" data-length="3600" href="#">1 Hour</a></li>
+          </ul>
+        </li>
+        <li><a data-cmd="ban" tabindex="-1" href="#">Ban</a></li>
+        <li><a data-cmd="unban" tabindex="-1" href="#">Unban</a></li>
+        {{/if}}
+      </ul>
+    </div>
+</template>
+
+<template name="homeLayout">
+  <div id="sb-site">
+  {{#famousContext id="mainCtx"}}
+    {{#HeaderFooterLayout headerSize="50" footerSize="0"}}
+
+      {{#Surface target="header" translate="[0,0,100]"}}
+      	<div id="header">{{> navigation}}</div>
+      {{/Surface}}
+  
+
+      {{#RenderController target="content"}}
+      <div id="content">{{> yield}}</div>
+      {{/RenderController}}
+
+    {{/HeaderFooterLayout}}
+  {{/famousContext}}
+  </div>
+</template>
+
+<template name="effectWrapper">
+  <div id="effectWrap"><div class="effectBox"></div></div>
+</template>
+
+<template name="navigation">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="pull-left"><img src="logo.png"></a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/watch">Watch</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="http://www.twitch.tv/drako_gaming/subscribe" target="_blank">Subscribe</a></li>
+        <li><a href="https://streamtip.com/t/drako_gaming" target="_blank">Support Drako</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Leaderboard <span class="caret"></span></a>
+          <ul class="dropdown-menu liveLeader" role="menu" style="width: 245px;padding-bottom:9px;">
+            <li style="text-align:center;"><a class="overlayItem" href="#">Top 10</a></li>
+            {{#each leaders}}
+            <li class="divider"></li>
+            <li><a class="overlayItem" href="#" style="width:100%;">{{name}}<span style="position: absolute;right: 0;margin-right: 10px;">| {{currency}}</span></a></li>
+            {{/each}}
+          </ul>
+        </li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding-right:15px;">
+        <li><span id="activeUserBuffs">{{#each activeBuffs}}<div class="buff-item" style="background-image:url('{{image}}');" title="<span class='ttItemName'>Active Buff: {{title}}</span>" data-content="<div class='ttItemDescription'>{{description}}<hr>Expires {{buffCountDown expires}}</div>"></div>{{/each}}</span></li>
+         {{#if currentUser}}        
+        <li><p class="navbar-text">{{currentUser.currency}} {{currencySlug}} | {{currentUser.exp}} {{experienceSlug}} | Level {{levelData.currentLev}} | {{currentUser.profile.display_name}}</p></li>{{/if}}
+        <li style="padding:10px;">{{> loginButtons}}</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</template>
+
+<template name="activeUserBuffs">
+</template>
+
+<template name="mobilenavigation">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="pull-left"><img src="logo.png"></a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="http://www.twitch.tv/drako_gaming/subscribe" target="_blank">Subscribe</a></li>
+        <li><a href="https://streamtip.com/t/drako_gaming" target="_blank">Support Drako</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding-right:15px;">
+        {{#if currentUser}}<li><p class="navbar-text" style="padding-left:10px;">{{currentUser.currency}} {{currencySlug}} | {{currentUser.exp}} {{experienceSlug}} | Level {{levelData.currentLev}} | {{currentUser.profile.display_name}}</p></li>{{/if}}
+        <li style="padding:10px;">{{> loginButtons}}</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</template>
+
+<template name="StrumTemplate">
+  {{#Surface}}
+<section class="main hbox space-between">
+      <article id="streamsContainer">
+ <div class="stream-wrap">
+  <div class="aspect">
+  <iframe class="vEmbed" src="http://player.twitch.tv/?channel=drako_gaming" frameborder="0" scrolling="no" seamless allowfullscreen></iframe>
+  </div>
+</div>
+        <div class="underVid"><div style="width:100%;"><span class="statusTag">{{#if stream.live}}ONLINE{{else}}OFFLINE{{/if}}</span><span class="titleTag">{{stream.title}}</span><span class="statsTag"><i class="fa fa-user statsIcon"></i>{{stream.viewers}}<i class="fa fa-eye statsIcon"></i>{{stream.views}}<i class="fa fa-heart statsIcon"></i>{{stream.follows}}</span></div></div>
+  </article>
+<aside id="sideWays">{{> flipper}}{{flipInit}}</aside>
+    </section>
+  <img src="drakoDraws-bg.png" style="display:none;">
+  {{/Surface}}
+</template>
+
+  <template name="hostedStream">
+  <div class="stream-wrap hostmode-stream">
+    <div class="aspect">
+      <div class="overlay-right"></div>
+      <div class="overlay-left"></div>
+      <div class="overlay-bottom"></div>
+      <div class="overlay-wrench"></div><div class="overlay-bottom-right"></div>
+      <div class="overlay-top"></div>
+      <iframe class="vEmbed" src="{{streamURL}}" frameborder="0" scrolling="no"></iframe>
+    </div>
+    </div>
+        <div class="underVid hostmode-info" style="background: rgb(20,20,20)">
+          <div style="width:100%;"><span class="statusTag">HOSTING</span><span class="titleTag"><strong><a href="{{streamLink}}" target="_blank">{{displayName}}</a>:</strong> {{title}}</span><span class="statsTag"><i class="fa fa-user statsIcon"></i>{{viewers}}</span>
+          </div>
+    </div>
+  </template>
+
+<template name="FAQ">
+  {{#Surface style="overflow:auto;"}}
+<div class="container">
+  <div class="row">
+  	<div class="col-md-8">
+	<h3>Drakonia<sup>beta</sup> Frequently Asked Questions</h3><br>
+<strong>1. How do I earn Scales and XP?</strong><br>
+You get Scales and XP just by being in the channel, whether that's on Twitch, the app or viewing from the site drakogaming.com/watch. Bonus points are awarded for watching on the site here and/or being subscribed on Twitch, you can see below how it works.<br><br>
+*You have to be in the channel to receive any points, including bonus ones*<br><br>
+-Offline-<br>
+Base amount is 2 Scales/XP every 5 minutes<br>
+Sub Bonus is 2 Scales/XP every 5 minutes<br>
+Site Bonus is 1 Scale/XP every 5 minutes<br><br>
+-Online-<br>
+Base amount is 5 Scales/XP every 5 minutes<br>
+Sub Bonus is 3 Scales/XP every 5 minutes<br>
+Site Bonus is 2 Scale/XP every 5 minutes<br>
+So for example if you're a sub watching the stream live on Twitch you'll get 8 points every 5 minutes, then if you began watching on the our site here it would go up to 10 per 5 minute. You don't need to be a sub to get the site bonus and vice versa.<br><br><br>
+
+<strong>2. What is XP for?</strong><br>
+XP will go towards your level, as you level up on the site you will have access to more items in the store and be eligible for more raffles that have a minimum level requirement.
+To see how much XP you need for your next level navigate to your profile (explained in question 5) and you'll have a progress bar.<br><br><br>
+
+<strong>3. What are Scales?</strong><br>
+Scales are the currency here on the site, you'll use them in various ways such as betting, auctions and the store. <br><br><br>
+
+<strong>4. Betting, auctions and the store, how do these work?</strong><br>
+Betting will be a cool way interact with the stream and hopefully win Scales, we can do bets for anything from gladiator battles in Chivalry to if I'll survive a perma death run.<br><br>
+Auctions will be a fun way for us to name characters in a game or give out a game, everyone can just bid what they want and whoever bids the most wins.<br><br>
+The store will be the main place to sink Scales (assuming you don't suck at betting) here you'll be able to buy things such as raffle tickets for giveaways, titles and a lot of other really cool things planned for the future.<br><br><br>
+
+<strong>5. How do I access these features?</strong><br>
+When you're on the "Watch" page which can be found at the top menu you'll see the stream and chat just like on Twitch. In the top right corner of chat you'll notice 3 gears which can be clicked on, doing so will flip the chat around and give you access to all of the sites feautures.<br><br>
+If you have any issues such as the chat just inverting itself, make sure your browser is up to date.
+<br><br><br>
+</div>
+  </div>
+</div>
+  {{/Surface}}
+</template>

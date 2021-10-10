@@ -1,0 +1,19 @@
+<template name="setGlow">
+    <div class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog set-color-dialog">
+            <div class="modal-content set-color-content">
+                <div class="modal-body set-color">
+                  <h2>Glowinator v2.0a</h2>
+                  <hr />
+                  <div id="glow-preview">{{currentUser.profile.display_name}}</div>
+                    <div class="slider">
+  <input id="glowslidey" type = "range" min="0" max="360"/>
+  </div>
+                  Drag the slider to choose your name color.<br>
+                  Glow will be applied to new messages you send. Glows lose their power after 14 days.<br><br>
+                  <center><button type="button" id="saveGlow" class="btn btn-default">Save Glow</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

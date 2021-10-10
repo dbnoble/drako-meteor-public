@@ -1,0 +1,809 @@
+@import url(https://fonts.googleapis.com/css?family=Aladin); 
+/* some basic styles. nothing to do with flexbox */
+      header, footer,
+      nav, article, aside {
+      }
+
+      /*
+        Force full width & height.
+
+        If this block is removed, the layout height/length will be determined by
+        the amount of content in the page. That might result in a page which has
+        a footer only a few inches from the top of the viewport, or one which
+        scrolls beyond the viewport.
+
+        This forces the layout to always be full screen regardless of how much,
+        or how little, content is in place. Neither is "right" or "wrong", there
+        are valid cases for each. I just want to be clear what's controlling the
+        page/viewport height.
+      */
+      html, body, .viewport {
+        background:transparent;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+      /* encapsulate the various syntax in helper clases */
+      /* inspired by http://infrequently.org/2009/08/css-3-progress/ */
+::-webkit-scrollbar {
+    left: -9px;
+    min-height: 10px;
+    width: 7px;
+    background-color: #6C6E71;
+    display: block;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+}
+ 
+::-webkit-scrollbar-track {
+    display:none;
+    opacity: 0;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+      /* items flex/expand vertically */
+      .vbox {
+        /* previous syntax */
+        display: -webkit-box;
+        display:    -moz-box;
+        display:         box;
+
+        -webkit-box-orient: vertical;
+           -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+                box-orient: vertical;
+
+        /* current syntax */
+        display: -webkit-flex;
+        display:    -moz-flex;
+        display:     -ms-flex;
+        display:         flex;
+
+        -webkit-flex-direction: column;
+           -moz-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+      }
+
+      /* items flex/expand horizontally */
+      .hbox {
+        /* previous syntax */
+        display: -webkit-box;
+        display:    -moz-box;
+        display:     -ms-box;
+        display:         box;
+
+        -webkit-box-orient: horizontal;
+           -moz-box-orient: horizontal;
+            -ms-box-orient: horizontal;
+                box-orient: horizontal;
+
+        /* current syntax */
+        display: -webkit-flex;
+        display:    -moz-flex;
+        display:     -ms-flex;
+        display:         flex;
+
+        -webkit-flex-direction: row;
+           -moz-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+      }
+
+      .space-between {
+        /* previous syntax */
+        -webkit-box-pack: justify;
+           -moz-box-pack: justify;
+            -ms-box-pack: justify;
+                box-pack: justify;
+
+        /* current syntax */
+        -webkit-justify-content: space-between;
+           -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+                justify-content: space-between;
+      }
+
+      /* I went with a fixed height header & footer because it's a common case.
+        This could easily be altered to flex proportionally with the page.
+      */
+      header {
+        height: 50px;
+      }
+        footer {
+        height: 40px;
+      }
+
+      .main {
+        height:100%;
+        /* previous syntax */
+        -webkit-box-flex: 1;
+           -moz-box-flex: 1;
+            -ms-box-flex: 1;
+                box-flex: 1;
+
+        /* current syntax */
+        -webkit-flex: 1;
+           -moz-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+                overflow:hidden;
+                position: relative;
+                z-index: 0;
+      }
+
+      article {
+        background: rgb(15,15,15);
+        /* previous syntax */
+        -webkit-box-flex: 5;
+           -moz-box-flex: 5;
+            -ms-box-flex: 5;
+                box-flex: 5;
+
+        /* current syntax */
+        -webkit-flex: 5;
+           -moz-flex: 5;
+            -ms-flex: 5;
+                flex: 5;
+                position: relative;
+      }
+
+      aside {
+        position:relative;
+        width:400px;
+        height:100%;
+        background: rgb(20,20,20);
+      }
+      .sb-header-adjusted{
+        z-index:9998!important;
+        position: absolute !important;
+        top:50px;
+        max-height: calc(100vh - 49px);
+        border-top: 1px solid #000;
+      }
+      .aspect{
+        width:100%;
+        height:100%;
+        position:relative;
+      }
+      .cEmbed {
+        height:100%;
+        width:100%;
+        position:absolute;
+        top:0;
+        bottom:0;
+      }
+      .stream-wrap {
+        height:calc(100% - 46px);
+        width:100%;
+        position: absolute;
+        padding-top:5px;
+        padding-right:5px;
+        padding-left:5px;
+      }
+      .vEmbed{
+        width:100%;
+        height:100%;
+      }
+      .underVid {
+        opacity: 0.5;
+        height: 52px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding-top:16px;
+        padding-left:5px;
+      }
+      .liveLeader{
+        background: rgba(0, 0, 0, 0.48);
+        border: rgba(255, 255, 255, 0.17) 1px solid;
+      }
+
+      .overlayItem {
+          color: #D5D5D5 !important;
+          pointer-events:none;
+      }
+
+.red-bg {	background: red; height:100%; width:100%;}
+.yellow-bg { background: yellow; }
+.green-bg { background: green; }
+.blue-bg { 	background: blue; height:100%; width:100%;}
+.fs-famous {background: rgb(20,20,20); width:100% !important, height:100% !important; min-height:100%; min-width:400px;}
+.fs-dark { background: rgb(20,20,20); }
+.flipHeader {
+ background: rgba(255, 255, 255, 0) none repeat scroll 0 0;
+    height: 44px;
+    position: absolute;
+    text-align: right;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+}
+.flipButton {
+  height: 40px;
+  color: #A5A5A5;
+  font-size: 20px;
+  cursor: pointer;
+  position:absolute;
+  right:7px;
+  top:7px;
+}
+.flipButton:hover {
+  color: #fff;
+}
+.flipnav {
+  font-size: 20px;
+  height:40px !important;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-top: 0px;
+  border-radius: 0 !important;
+  background-color: #323232 !important;
+  color: #D3D3D3;
+  border-color: #080808;
+}
+.flipIcon {
+
+}
+.flipnav:hover{
+  text-decoration: none;
+  color: #fff;
+  border-color: #080808;
+}
+.flipnav:focus {
+    outline: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   color: #D3D3D3;
+}
+.flipnavAdmin {
+  font-size: 14px;
+  height:34px !important;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-top: 0px;
+  border-radius: 0 !important;
+  background-color: rgb(119, 119, 119);
+  color: #D3D3D3;
+  border-color: #080808;
+}
+.flipnavAdmin:hover{
+  text-decoration: none;
+  color: #fff;
+  border-color: #080808;
+}
+.flipnavAdmin:focus {
+    outline: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   color: #D3D3D3;
+}
+.flipnavProfile {
+  font-size: 14px;
+  height:34px !important;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-top: 0px;
+  border-radius: 0 !important;
+  background-color: rgb(119, 119, 119);
+  color: #D3D3D3;
+  border-color: #080808;
+  font-weight:bolder;
+}
+.flipnavProfile:focus {
+    outline: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   color: #D3D3D3;
+}
+.flipnavProfile:hover{
+  text-decoration: none;
+  color: #fff;
+  border-color: #080808;
+}
+#flipBody {
+  height:100%;
+  width:100%;
+  background: rgb(30, 30, 30);
+  overflow:auto;
+}
+i.fa {
+  -webkit-animation: show 1s 1;
+  /* any other properties to override from FontAwesome's default .fa rule */
+}
+@-webkit-keyframes show {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.flipTab{
+  height: 100%;
+  background-color: #1E1E1E;
+  padding: 5px;
+  color: #D3D3D3;
+  overflow-x: hidden;
+}
+.flipTabCover{
+  height: 100%;
+  background-color: #1E1E1E;
+  padding: 0;
+  color: #D3D3D3;
+}
+.flipTabAdmin{
+  height: 100%;
+  background-color: #1E1E1E;
+  color: #D3D3D3;
+}
+.flipTabs {
+  height: 100%;
+}
+#adminBettingTab{
+  padding-left:15px;
+  padding-right:15px;
+}
+#adminBettingTab.entry{
+  margin-bottom:10px;
+}
+.durationInput {
+  width: 40px;
+  text-align: center;
+}
+.betHeader {
+  padding: 10px;
+  background-color: rgb(50, 50, 50);
+  font-size: 18px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  text-align:center;
+}
+.theOptions {
+  padding: 10px;
+  border: 1px solid rgb(50,50,50);
+  margin: 0;
+}
+.placeBet {
+  text-align:center;
+  padding: 10px;
+  background-color: rgb(50, 50, 50);
+  font-size: 18px;
+  border-radius: 0 0 10px 10px;
+  margin: 0;
+}
+input#betAmount{
+  text-align:center;
+  color: #000;
+  padding-bottom:3px;
+  padding-left:5px;
+  border-radius: 5px;
+}
+.betAmount {
+  float:left;
+}
+.prizePool {
+  position:relative;
+  margin-top:10px;
+  margin-bottom:10px;
+  height:168px;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAS0lEQVQYV2NcunSpcXR09FkGPACkhhEkj08xTI40hbhMRbYJbCIMIEugOwdDIbJGZE+iKIQ5AUSjhwTpVmMLIhTPgDgwd6FbhywHANFkRE9fwLzdAAAAAElFTkSuQmCC) repeat;
+}
+.flippinCray {
+  position:relative;
+  border: 0 solid rgb(20, 20, 20);
+  border-radius: 5px;
+  box-shadow: 0 0 50px #000 inset, -10px -10px 50px #000 inset, 10px 10px 50px #000 inset, 0 0 20px #fff inset, 0 0 22px #000;
+  width: 100%;
+  height:100%;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAS0lEQVQYV2NcunSpcXR09FkGPACkhhEkj08xTI40hbhMRbYJbCIMIEugOwdDIbJGZE+iKIQ5AUSjhwTpVmMLIhTPgDgwd6FbhywHANFkRE9fwLzdAAAAAElFTkSuQmCC) repeat;
+}
+
+
+.animated { 
+    -webkit-animation-duration: 2s; 
+    animation-duration: 2s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+    -webkit-animation-timing-function: linear; 
+    animation-timing-function: linear; 
+    animation-iteration-count:infinite; 
+    -webkit-animation-iteration-count:infinite; 
+} 
+
+@-webkit-keyframes fadeIn { 
+    0% {opacity: 1;} 
+    50% {opacity: .01;}
+    100% {opacity: 1;} 
+} 
+@keyframes fadeIn { 
+    0% {opacity: 1;} 
+    50% {opacity: .01;}
+    100% {opacity: 1;} 
+} 
+.fadeIn { 
+    -webkit-animation-name: fadeIn; 
+    animation-name: fadeIn; 
+}
+.statusTag {
+  font-weight: bolder;
+  font-size: 18px;
+  padding: 5px;
+  background: #4F4F4F;
+}
+.titleTag {
+  font-size: 18px;
+  color: #D3D3D3;
+  padding-left: 10px;
+}
+.statsTag {
+  position: absolute;
+  right: 5px;
+  top: 13px;
+  padding: 5px;
+  color: #D3D3D3;
+}
+.statsIcon {
+  margin-right:5px;
+  margin-left:10px;
+}
+#scorecard{
+				text-align: left;
+				padding:20px;
+				background: #444;
+				color:#FFF;
+				margin-bottom:10px;
+			}
+			#status{
+				transition:opacity .2s ease-in-out;
+				border-radius: 10px;
+				opacity:0;
+				height:40px;
+				height:40px;
+				line-height: 40px;
+				background:#fcf8e3;
+			}
+			#status.show{
+				opacity:1;
+			}
+			.score{
+				clear: both;
+				margin-bottom:10px;
+				font-size: 0.85em;
+			}
+			#score{
+				font-size: 1em;
+				width:140px;
+				height:40px;
+				line-height: 40px;
+				color: #999;
+				background: #EEE;
+				display: inline-block;
+				border-radius: 20px;
+				margin-bottom: 10px;
+			}
+			#icon{
+				background: #FFF;
+				width:100px;
+				height:100px;
+				color:black;
+				font-size: 4em;
+				text-align: center;
+				line-height: 100px;
+				float:left;
+				margin-right:10px;
+				margin-bottom:10px;
+			}
+			progress.level{
+				width:100%;
+			}
+			progress.level[value] {
+				-webkit-appearance: none;
+				appearance: none;
+				height:20px;
+			}         
+			progress.level[value]::-webkit-progress-bar {
+				background-color: #666;
+				border-radius: 0px;
+				overflow: hidden;
+			} 
+			progress.level[value]::-webkit-progress-value {
+				background: #3D9970;
+				border-radius: 0px; 
+			}
+
+			progress.voteBar{
+				width:100%;
+			}
+			progress.voteBar[value] {
+				-webkit-appearance: none;
+				appearance: none;
+				height:20px;
+			}         
+			progress.voteBar[value]::-webkit-progress-bar {
+				background-color: transparent;
+				border-radius: 0px;
+				overflow: hidden;
+			} 
+			progress.voteBar[value]::-webkit-progress-value {
+				background: #3D9970;
+				border-radius: 0px; 
+			}
+			progress.fakeBar{
+        margin-top: -25px;
+        position: absolute;
+				width:100%;
+			}
+			progress.fakeBar[value] {
+				-webkit-appearance: none;
+				appearance: none;
+				height:20px;
+			}         
+			progress.fakeBar[value]::-webkit-progress-bar {
+				background-color: transparent;
+				border-radius: 0px;
+				overflow: hidden;
+			} 
+			progress.fakeBar[value]::-webkit-progress-value {
+				background: #3D9970;
+				border-radius: 0px; 
+			}
+
+.voteHeader {
+  padding: 10px;
+  background-color: rgb(50, 50, 50);
+  font-size: 18px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  text-align:center;
+}
+.voteOptions {
+  padding: 10px;
+  border: 1px solid rgb(50,50,50);
+  margin: 0;
+}
+.placeVote {
+  text-align:center;
+  padding: 10px;
+  background-color: rgb(50, 50, 50);
+  font-size: 18px;
+  border-radius: 0 0 10px 10px;
+  margin: 0;
+}
+.votesHolder {
+  position:relative;
+  margin-top:10px;
+  margin-bottom:10px;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAS0lEQVQYV2NcunSpcXR09FkGPACkhhEkj08xTI40hbhMRbYJbCIMIEugOwdDIbJGZE+iKIQ5AUSjhwTpVmMLIhTPgDgwd6FbhywHANFkRE9fwLzdAAAAAElFTkSuQmCC) repeat;
+}
+.submitVote {
+  text-align:center;
+  padding: 10px;
+  background-color: rgb(50, 50, 50);
+  font-size: 18px;
+  border-radius: 0 0 10px 10px;
+  margin: 0;
+}
+input#voteAmount{
+  text-align:center;
+  color: #000;
+  padding-bottom:3px;
+  padding-left:5px;
+  border-radius: 5px;
+}
+.voteAmount {
+  float:left;
+}
+.inv-input{
+  margin-bottom: 5px;
+}
+#item-admin-left{
+  position:relative;
+  height:115px;
+  width:115px;
+  margin-right:10px;
+  float:left;
+  margin-top:6px;
+  background-image: url('addItemFrame.png');
+}
+#item-admin-right{
+  float:left;
+  width:240px;
+}
+#item-admin-holder{
+  width: 100%;
+}
+#item-admin-holder:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+#item-admin-image-preview{
+  position: absolute;
+  width: 105px;
+  height:105px;
+  top: 5px;
+  bottom:5px;
+  left:5px;
+  right:5px;
+  background-size: 85px;
+  background-position-x: 11px;
+  background-position-y: 8px;
+  background-repeat: no-repeat;
+  background-image: url('addItemPlaceholder.png');
+}
+label.sm-d {
+  font-size: 12px;
+}
+#currencyChange {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width:200px;
+  height:200px;
+  pointer-events: none;
+  background-color:transparent;
+  z-index: 50;
+  
+}
+.currencyDown{
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  color: rgb(142, 11, 11);
+  font-size: 40px;
+  font-weight: bold;
+  font-style: oblique;
+  padding-right:5px;
+}
+.currencyUp{
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  color: rgb(16, 131, 13);
+  font-size: 40px;
+  font-weight: bold;
+  font-style: oblique;
+  padding-right:5px;
+}
+#effectWrap{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:10;
+  opacity: 1;
+  display:none;
+  color: #fff;
+}
+#effectWrap canvas{
+  position:absolute;
+  opacity: .85;
+}
+.flipContainer { 
+  width: 400px;
+  height: 100%;
+  position: relative;
+  perspective: 800px;
+}
+#newFlip {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  transform-origin: right center;
+}
+#newFlip figure {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+#newFlip .backSide{
+  transform: rotateY( 180deg );
+}
+#newFlip.flipped {
+  transform: translateX( -100% ) rotateY( -180deg );
+}
+select.bundledItems{
+  width: calc(100% - 40px);
+}
+.bundleCloner{
+  margin-bottom:5px;
+}
+.effectBox{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  opacity: 1;
+  z-index:2;
+}
+.path-select{
+  max-width: 315px;
+  margin-right:10px;
+  float:left;
+}
+.cardWrapper{
+  perspective: 5000;
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:"preserve-3d";
+  /*background-color:#333;*/
+  -webkit-font-smoothing:antialiased;
+}
+.cardFace{
+  position:absolute;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  transform-style:"preserve-3d";
+}
+.front{
+  transform-style:"preserve-3d";
+  backface-visibility:"hidden";
+  background-color:#333; 
+}
+
+.back{
+  transform-style:"preserve-3d";
+  backface-visibility:"hidden";
+  background-color:#333; 
+}
+.card{
+  transform-style:"preserve-3d";
+  height:100%;
+}
+.panel-default{
+  border-color: #323232 !important;
+  background: #444 !important;
+}
+.panel-heading{
+  border-color: #323232 !important;
+  background-image:none !important;
+  background: #323232 !important;
+  background-color: #323232 !important;
+}
+.panel-title{
+  color: #D3D3D3;
+  font-weight: bolder;
+  background: #323232 !important;
+}
+.input-group{
+  margin-bottom: 5px;
+}
+.sb-slidebar * {
+  -webkit-transform: none;
+}
+.sb-right {
+  overflow:none;
+}
+.popover {
+  z-index: 9999 !important;
+}
+#header {
+  height:50px;
+}

@@ -1,0 +1,61 @@
+<template name="uservotingtab">
+{{#if poll.count}}
+  <hr>
+  {{#each poll}}
+  {{#if live}}
+  <h2 style="text-align:center;"><strong>VOTING <span style="color: #3D9970;">OPEN</span></strong></h2>
+  {{else}}
+  <h2 style="text-align:center;"><strong>VOTING <span style="color: #d9534f;">CLOSED</span></strong></h2>
+  {{/if}}
+  <hr>
+  <h4 style="margin-bottom:20px;">{{challenge}}</h4>
+  <div class="votesHolder"><span style="position:absolute; font-size: 10px; top: 5px; text-align:center; width:100%;">R E S U L T S</span>
+    <div style="display:inline-block; padding-top:30px; padding-left: 5px; padding-right:5px; width:100%;">
+    {{#each options}}
+      <div style="width:100%; margin-bottom: 10px; text-align:left;">
+        <progress class="voteBar" max="100" value="{{votePercent}}"></progress>
+        <progress class="fakeBar" max="100" value="1"></progress>
+        <div style="font-size:18px">{{optionText}}</div>
+        <div style="font-size:smaller;">{{votePercent}}% ({{votesToScales}} Scales)</div>
+      </div>
+    {{/each}}
+    </div>
+  </div>
+  <div class="voteHeader">PLACE YOUR VOTE</div>
+  <div class="voteOptions">
+    <p style="font-size:18px">{{challenge}}</p>
+    {{#if live}}
+    {{#each options}}
+<div class="radio">
+  <label>
+    <input type="radio" class="radio voteOnOption" name="radioOptions" value="{{optionId}}">
+    {{optionText}}
+  </label>
+</div>
+  {{/each}}
+    <div style="font-size: 10px; margin-bottom:5px; text-align:center; width:100%;">1 &nbsp;V O T E &nbsp;=&nbsp; 5 &nbsp;S C A L E S</div>
+    {{else}}
+      <ul>
+      {{#each options}}
+        <li>{{optionText}}<br><span style="font-size:smaller;">Total Votes: {{optionVotes}}</span></li>
+  {{/each}}
+    </ul>
+    {{/if}}
+  </div>
+  <div class="placeVote">
+    {{#if live}}
+  <button type="button" id="placeVote" class="btn btn-default">Submit Vote</button>
+    {{else}}
+    VOTING ALREADY CLOSED<br>
+    <span style="font-size:smaller;">Come back during the next poll!</span>
+    {{/if}}
+  </div>
+  {{/each}}
+{{else}}
+  <div style="height:100%; width:100%;">
+    <div style="text-align:center;">
+  <h2>No Active Polls</h2><hr><h4>Come back during the next poll!</h4>
+    </div>
+  </div>
+{{/if}}
+</template>

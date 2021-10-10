@@ -1,0 +1,58 @@
+#chat.clr {
+  background-color: rgba(15,15,15, .75);
+  font-size: 16.3333px;
+  max-width:400px;
+  min-width:400px;
+  height: 400px;
+  min-height: 400px;
+}
+
+#chat-wrapper.clr {
+  max-width:400px;
+  min-width:400px;
+  height: 400px;
+  min-height: 400px;
+ background-color: rgba(15,15,15, .75)
+}
+
+#chat.clr div.chat-line {
+  opacity:0;
+  text-align:center;
+   -webkit-transition: opacity 0.5s linear;
+  -moz-transition: opacity 0.5s linear;
+  -o-transition: opacity 0.5s linear;
+  -ms-transition: opacity 0.5s linear;
+  transition: opacity 0.5s linear;
+  -webkit-transition: scale 0.5s linear;
+  -moz-transition: scale 0.5s linear;
+  -o-transition: scale 0.5s linear;
+  -ms-transition: scale 0.5s linear;
+  transition: scale 0.5s linear;
+}
+
+
+#chat.clr div.chat-line:last-child {
+    opacity: 1;
+  padding-bottom:20px;
+}
+#chat.clr div.chat-line:nth-last-child(2) {
+    opacity: .80;
+    scale: .90;
+}
+#chat.clr div.chat-line:nth-last-child(3) {
+    opacity: .60;
+  scale: .85;
+}
+#chat.clr div.chat-line:nth-last-child(4) {
+    opacity: .40;
+    scale: .80;
+}
+#chat.clr div.chat-line:nth-last-child(5) {
+    opacity: .20;
+  scale: .75;
+}
+
+
+#chat.clr span.chat-time {
+  display:none;
+}

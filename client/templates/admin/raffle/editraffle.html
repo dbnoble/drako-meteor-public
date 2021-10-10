@@ -1,0 +1,45 @@
+<template name="editraffle">
+  <h1 style="text-align:center; margin-top:10px">EDIT RAFFLE</h1>
+  <hr style="margin-top:0;">
+  {{#if rafflerounds.count}}
+  {{#each rafflerounds}}
+  <p style="font-size:18px;">{{prize}}</p>
+  {{#if live}}
+    Entries: <br><span style="font-size:smaller;">{{raffleEntries}}</span>
+  {{else}}
+  Entries: <br><span style="font-size:smaller;">{{raffleEntries}}</span>
+  {{/if}}
+  {{#if live}}
+  <div style="text-align:center; margin-bottom:10px;"><strong>RAFFLE IS <span style="color: #5cb85c;">OPEN</span></strong></div>
+  <hr>
+  <button type="button" id="closeRaffle" class="btn btn-danger" style="width:100%">Close Raffle Entry</button>
+  {{else}}
+  <div style="text-align:center; margin-bottom:10px"><strong>RAFFLE IS <span style="color: #d9534f;">CLOSED</span></strong></div>
+  <hr>
+  <button type="button" id="awardRaffle" class="btn btn-success" style="width:100%">Select Winner</button>
+  {{/if}}
+  {{/each}}
+  {{else}}
+    <div class="control-group" id="fields">
+      <div class="form-group">
+    <label for="rafflePrize">Raffle Prize/Details</label>
+    <textarea class="form-control" id="rafflePrize" rows="3" placeholder="Ex: 1 Copy of BattleToads"></textarea>
+  </div>
+            <label class="control-label" for="field1">Bet Options</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+    <div class="input-group" style="margin-bottom: 12px">
+      <div class="input-group-addon">Entry Cost</div>
+      <input type="number" class="form-control inv-input" id="raffleCost" value="250">
+      <div class="input-group-addon">Scales</div>
+    </div>
+                  <hr>
+                  <p><strong>WARNING: </strong>You will not be able to edit these details once you have started the raffle. Please make sure all the details you have entered are correct before continuing.</p>
+                  <hr>
+                  <button type="button" id="submitNewRaffle" class="btn btn-success" style="width:100%; margin-bottom:10px;">Start Raffle</button>
+                  <button type="button" id="clearRaffleFields" class="btn btn-danger" style="width:100%">Cancel</button>
+                </form>
+            </div>
+        </div>
+  {{/if}}
+</template>

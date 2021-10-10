@@ -1,0 +1,152 @@
+<template name="edititems">
+  <form role="form" autocomplete="off">
+    <div class="control-group" id="fields">
+  <div class="form-group">
+    <div id="item-admin-holder">
+      <div id="item-admin-left">
+        <div id="item-admin-image-preview"></div>
+      </div>
+      <div id="item-admin-right">
+        <input id="newItemImageUrl" class="itemAdminClear" name="item-img-url" type="hidden" />
+        <label class="sm-d" for="itemTitle">Item Name</label>
+        <input type="text" class="form-control inv-input itemAdminClear" id="newItemTitle" placeholder="Black Tar Skooma" />
+            <label class="sm-d" for="itemSlug">Item Slug</label>
+        <input type="text" class="form-control inv-input itemAdminClear" id="newItemSlug" placeholder="black-tar-skooma" />
+      </div>
+    </div>
+    <label class="sm-d uploadLabel">Item Image</label>
+    {{> uploadItemImageS3}}
+  </div>
+      <div class="form-group">
+        <label class="sm-d">Item Type</label>
+  <select id="newItemType" style="margin-bottom:15px;" class="form-control">
+    <option value="regular">Regular</option>
+    <option value="key">Key</option>
+    <option value="test">Test</option>
+    <option value="bundle">Bundle</option>
+    <option value="chest" disabled>Chest</option>
+    <option value="buff">Buff</option>
+    <option value="userSubmission">User Submission</option>
+    <option value="rankUp">Rank-Up</option>
+    <option value="upgrade" disabled>Upgrade</option>
+    <option value="sfx" disabled>Special Effects</option>
+    <option value="recipe">Recipe</option>
+    <option value="presentBadge" disabled>Presentation Kit</option>
+  </select>
+    <label for="itemDescription" class="sm-d">Item Description</label>
+    <textarea class="form-control itemAdminClear" style="margin-bottom:15px;" id="newItemDescription" rows="2" placeholder="Small vial of extremely potent skooma."></textarea>
+        <div class="input-group" style="margin-bottom: 12px">
+      <div class="input-group-addon">XP Requirement</div>
+      <input type="number" class="form-control inv-input itemAdminClear" id="reqLev" value="0">
+      <div class="input-group-addon">xp</div>
+    </div>
+        <div style="width:100% text-align:center;">
+          <center>
+         <label class="checkbox-inline">
+          <input type="checkbox" id="isShopItem" value="shopItem"> Shop Item
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="isCraftable" value="craftable"> Craftable
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="isStacked" value="stacked"> Stacked
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" id="isEssential" value="essential"> Essential
+        </label>
+          </center>
+        </div>
+  </div>
+      {{> shopItemOpts}}
+      {{> keyItemOpts}}
+      {{> bundleItemOpts}}
+      {{> buffItemOpts}}
+      {{> submissionItemOpts}}
+        </div>
+    <hr>
+                  <button type="button" id="addNewItem" class="btn btn-success" style="width:100%; margin-bottom:10px;">Add New Item</button>
+                  <button type="button" id="clearItemFields" class="btn btn-danger" style="width:100%">Cancel</button>
+    </form>
+</template>
+
+<template name="shopItemOpts">
+  <div id="shopItemOpts" style="display:none;">
+    <div class="input-group">
+      <div class="input-group-addon">Shop Price:</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="newItemCost" placeholder="Amount">
+      <div class="input-group-addon">scales</div>
+    </div>
+    <div class="input-group">
+      <div class="input-group-addon">Shop Position:</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="newItemPosition" placeholder="0">
+      <div class="input-group-addon">Gravity</div>
+    </div>
+  </div>
+</template>
+
+<template name="keyItemOpts">
+  <div id="keyItemOpts" style="display:none;">
+    <div class="input-group">
+      <div class="input-group-addon">Game</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="serverGame" placeholder="Skyrim Online">
+    </div>
+    <div class="input-group">
+      <div class="input-group-addon">Server/IP</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="serverName" placeholder="Drakonia">
+    </div>
+    <div class="input-group">
+      <div class="input-group-addon">Password</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="serverPass" placeholder="drakosecretpassword">
+    </div>
+  </div>
+</template>
+
+<template name="buffItemOpts">
+  <div id="buffItemOpts" style="display:none;">
+      <label class="sm-d">Buff Stat</label>
+    <select id="buffStat" style="margin-bottom: 5px;" class="form-control">
+    <option value="currency">Currency</option>
+    <option value="exp">Experience</option>
+  </select>
+        <div class="input-group" style="margin-bottom:5px;">
+      <div class="input-group-addon">Stat Bonus:</div>
+      <input type="number" class="form-control inv-input itemAdminClear" id="buffBonus" value="2">
+    </div>
+        <div class="input-group" style="margin-bottom:5px;">
+      <div class="input-group-addon">Buff Duration:</div>
+      <input type="number" class="form-control inv-input itemAdminClear" id="buffDuration" value="48">
+      <div class="input-group-addon">hours</div>
+    </div>
+  </div>
+</template>
+
+<template name="submissionItemOpts">
+  <div id="submissionItemOpts" style="display:none;">
+    <div class="input-group">
+      <div class="input-group-addon">Modal Slug</div>
+      <input type="text" class="form-control inv-input itemAdminClear" id="modalSlug" placeholder="drakoDraws">
+    </div>
+  </div>
+</template>
+
+<template name="bundleItemOpts">
+  <div id="bundleItemOpts" class="clearfix" style="display:none;">
+    <label class="sm-d">Bundled Items</label>
+    <div class="bundleCloner clearfix">
+    <select class="form-control bundledItems pull-left">
+      {{#each availableItems}}
+        <option value="{{_id}}">{{title}}</option>
+      {{/each}}
+</select>
+    <button class="btn btn-md btn-success pull-right addBundleOption"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+  </div>
+</template>
+
+<template name="uploadItemImage">
+    {{> upload_bootstrap fileTypes='.jpg,.jpeg,.png,.gif' multiple=false callbacks=uploadedItemImg }}
+</template>
+
+<template name="uploadItemImageS3">
+   <input type="file" id="item-image-upload">
+</template>

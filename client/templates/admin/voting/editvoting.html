@@ -1,0 +1,53 @@
+<template name="editvoting">
+  <h1 style="text-align:center; margin-top:10px">NEW POLL</h1>
+  <hr style="margin-top:0;">
+  {{#if poll.count}}
+  {{#each poll}}
+  <p style="font-size:18px;">{{challenge}}</p>
+  {{#if live}}
+  <ul>
+  {{#each options}}
+        <li>{{optionText}}<br><span style="font-size:smaller;">Votes: {{optionVotes}}</span></li>
+  {{/each}}
+    </ul>
+  {{/if}}
+  {{#if live}}
+  <div style="text-align:center; margin-bottom:10px;"><strong>VOTING IS <span style="color: #5cb85c;">OPEN</span></strong></div>
+  <hr>
+  <button type="button" id="closeRound" class="btn btn-danger" style="width:100%">Close Voting</button>
+  {{else}}
+  <div style="text-align:center; margin-bottom:10px"><strong>VOTING IS <span style="color: #d9534f;">CLOSED</span></strong></div>
+  <hr>
+  <button type="button" id="awardWinners" class="btn btn-success" style="width:100%">Close Voting</button>
+  {{/if}}
+  {{/each}}
+  {{else}}
+    <div class="control-group" id="fields">
+      <div class="form-group">
+    <label for="pollQuestion">Poll Question</label>
+    <textarea class="form-control" id="pollQuestion" rows="3" placeholder="Ex: Should Drako eat his shoe?"></textarea>
+  </div>
+            <label class="control-label" for="field1">Vote Options</label>
+            <div class="controls"> 
+                <form role="form" autocomplete="off">
+                    <div class="entry poll-entry col-xs-12" style="margin-bottom:10px; padding-left:0; padding-right:0;">
+                        <input class="form-control voteOption" name="voteOption[]" type="text" placeholder="Enter first option" />
+                    </div><br>
+                    <div class="entry poll-entry cloner poll-cloner input-group col-xs-12" style="margin-bottom:10px;">
+                        <input class="form-control voteOption" name="voteOption[]" type="text" placeholder="Enter another option" />
+                    	<span class="input-group-btn">
+                            <button class="btn btn-success btn-add-pollOption" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
+                    </div>
+                  <hr>
+                  <p><strong>WARNING: </strong>You will not be able to edit these details once you have started the poll. Please make sure all the details you have entered are correct before continuing.</p>
+                  <hr>
+                  <button type="button" id="submitNewPoll" class="btn btn-success" style="width:100%; margin-bottom:10px;">Open Voting</button>
+                  <button type="button" id="clearPollFields" class="btn btn-danger" style="width:100%">Cancel</button>
+                </form>
+            </div>
+        </div>
+  {{/if}}
+</template>

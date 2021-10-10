@@ -1,0 +1,90 @@
+<template name="userbettingtab">
+{{#if betrounds.count}}
+  <hr>
+  {{#each betrounds}}
+  {{#if live}}
+  <h2 style="text-align:center;"><strong>BETTING <span style="color: #5cb85c;">OPEN</span></strong></h2>
+  {{else}}
+  <h2 style="text-align:center;"><strong>BETTING <span style="color: #d9534f;">CLOSED</span></strong></h2>
+  {{/if}}
+  <hr>
+  <div class="prizePool"><span style="position:absolute; font-size: 10px; top: 5px; text-align:center; width:100%;">P R I Z E<span style="color:transparent;"> - </span>P O O L</span>
+    <span style="position:absolute; top: 30px; font-size:72px;text-align:center;width:100%;">{{roundPool}}</span>
+  <span style="position:absolute; font-size: 14px; bottom: 10px; text-align:center; width:100%;">S&nbsp;&nbsp;C&nbsp;&nbsp;A&nbsp;&nbsp;L&nbsp;&nbsp;E&nbsp;&nbsp;S</span></div>
+  {{#if hasBet}}  
+  <div class="betHeader">YOUR BET HAS BEEN RECEIVED!</div>
+  {{else}}
+  <div class="betHeader">PLACE YOUR BET</div>
+  {{/if}}
+  <div class="theOptions">
+    <p style="font-size:18px">{{challenge}}</p>
+ {{#if hasBet}}
+      <ul>
+      {{#each options}}
+        <li>{{optionText}}<br><span style="font-size:smaller;">Total Wagered: {{optionPool}} Scales</span></li>
+  {{/each}}
+    </ul>
+    {{else}}
+    {{#if live}}
+    {{#each options}}
+<div class="radio">
+  <label>
+    <input type="radio" class="radio betOnOption" name="radioOptions" value="{{optionId}}">
+    {{optionText}}
+  </label>
+</div>
+  {{/each}}
+    {{else}}
+      <ul>
+      {{#each options}}
+        <li>{{optionText}}<br><span style="font-size:smaller;">Total Wagered: {{optionPool}} Scales</span></li>
+  {{/each}}
+    </ul>
+    {{/if}}
+    {{/if}}
+  </div>
+  <div class="placeBet">
+    {{#if hasBet}}
+    GOOD LUCK!
+    {{else}}
+    {{#if live}}
+    <input type="number" id="betAmount" min="1" max="{{currentUser.currency}}" value="5" />
+  <button type="button" id="placeBet" class="btn btn-default">Place Bet</button>
+    {{else}}
+    BETTING ALREADY CLOSED<br>
+    <span style="font-size:smaller;">Come back during the next round!</span>
+    {{/if}}
+    {{/if}}
+  </div>
+  {{/each}}
+{{else}}
+  <div style="height:100%; width:100%;">
+    <div style="text-align:center;">
+  <h2>No Active Betting Rounds</h2><hr><h4>Come back during the next round!</h4>
+    </div>
+    {{#each completeRound}}
+    <hr>
+    <h3>Last Round Results</h3>
+    <p style="font-size:18px;">{{challenge}}</p>
+    <table class="table" style="background-color: transparent;">
+      <thead>
+        <tr>
+          <th>Winner</th>
+          <th>Wager</th>
+          <th>Winnings</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each winneR}}
+        <tr>
+          <td>{{displayName}}</td>
+          <td>{{wagered}}</td>
+          <td><strong>+{{wonAmount}}</strong></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/each}}
+  </div>
+{{/if}}
+</template>

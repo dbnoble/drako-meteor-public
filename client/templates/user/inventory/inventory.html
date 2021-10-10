@@ -1,0 +1,66 @@
+<template name="preshow">
+  <div id="crafting-station">
+ <div id="crafting" class="crafting">
+    </div>
+    <div id="itemResult"></div>
+    <button class="craftButton btn btn-success btn-xs no-item-found">CRAFT</button>
+  </div>
+      <div id="inventory" class="inventory">
+        {{#each inventory}}
+        {{> inventoryItem}}
+     {{/each}}
+    </div>
+  <hr>
+  <div class="shopWrapper scrollbar-macosx scrollbar-general">
+{{> store}}
+  </div>
+</template>
+
+<template name="inventoryItem">
+  {{#if isAccessKey}}
+        <div data-item-handle="{{slug}}" data-item-type="{{type}}" data-item-id="{{_id}}" data-item-origin="{{origin}}" data-item-qty="{{qty}}" class="inventory-item item-info ss-active-child ui-draggable-handle" style="background-image:url('{{image}}');" title="<span class='ttItemName'>{{game}} Access Info</span>" data-content="<div class='ttItemDescription'>Server: {{server}}<br>Password: {{pass}}</div>"></div>
+        {{else}}
+        <div data-item-handle="{{slug}}" data-item-type="{{type}}" data-item-id="{{_id}}" data-item-origin="{{origin}}" data-item-qty="{{qty}}" class="inventory-item item-info ss-active-child ui-draggable-handle" style="background-image:url('{{image}}');" title="<span class='ttItemName'>{{title}}</span>" data-content="<div class='ttItemDescription'>{{description}}<div>">
+          {{#if stacked}}<span class="inventory-item-count">{{qty}}</span>{{/if}}
+      </div>
+        {{/if}}
+</template>
+
+<template name="store">
+  <ul class="media-list shopContainer">
+    {{#each shopItems}}
+    {{> shopItem}}
+    {{/each}}
+</ul>
+</template>
+
+<template name="shopItem">
+  <li class="media shopListing">
+    <div class="media-left shopImageHolder">
+      <center>
+        <img class="media-object shopImage" src="{{image}}" alt="{{title}}">
+        {{#if limitedItem}}
+        {{#if isAvailable}}
+        <button class="btn btn-success btn-xs{{canAfford}}{{hasReq levelReq}}" style="padding: 1px 10px; font-size: 9px;" {{canBuy levelReq}}>BUY</button>
+        {{else}}
+        <button class="btn btn-success btn-xs cannot-afford" style="padding: 1px 10px; font-size: 9px;" disabled>SOLD OUT</button>
+        {{/if}}
+        {{else}}
+        {{#if subonly}}
+        {{#if subReq}}
+        <button class="btn btn-success btn-xs{{canAfford}}{{hasReq levelReq}}" style="padding: 1px 10px; font-size: 9px;" {{canBuy levelReq}}>BUY</button>
+        {{else}}
+        <button class="btn btn-success btn-xs cannot-afford" style="padding: 1px 10px; font-size: 9px;" disabled>SUB ONLY</button>
+        {{/if}}
+        {{else}}
+        <button class="btn btn-success btn-xs{{canAfford}}{{hasReq levelReq}}" style="padding: 1px 10px; font-size: 9px;" {{canBuy levelReq}}>BUY</button>
+        {{/if}}
+        {{/if}}
+      </center>
+    </div>
+    <div class="media-body shopDetails">
+      <h4 class="media-heading" style="margin-bottom: 0;">{{title}}</h4>
+      <span style="font-size:12px;">{{description}}{{availability}}</span><br>Price: {{shopPrice}} scales
+    </div>
+  </li>
+</template>

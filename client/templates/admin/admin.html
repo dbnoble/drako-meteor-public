@@ -1,0 +1,36 @@
+<template name="admintab">
+  {{#if isAdmin}}
+  {{> admintabnav}}
+  {{> admintabholder}}
+  {{/if}}
+</template>
+
+<template name="admintabnav">
+      <div class="btn-group btn-group-justified" role="group" aria-label="">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavAdmin" data-target="#adminBettingTab" aria-controls="adminBettingTab" role="tab" data-toggle="tab"><i class="fa fa-money"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavAdmin" data-target="#adminAuctionTab" aria-controls="adminAuctionTab" role="tab" data-toggle="tab"><i class="fa fa-gavel"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavAdmin" data-target="#adminPollTab" aria-controls="adminPollTab" role="tab" data-toggle="tab"><i class="fa fa-ticket"></i></button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn flipnavAdmin" data-target="#adminItemTab" aria-controls="adminItemTab" role="tab" data-toggle="tab"><i class="fa fa-cart-plus"></i></button>
+        </div>
+      </div>
+</template>
+
+<template name="admintabholder">
+  {{#if isAdmin}}
+  <div role="tabpanel" class="flipTabs" style="overflow-x:auto; max-height:calc(100vh - 130px);">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in flipTab active" id="adminBettingTab">{{> editbetting}}</div>
+      <div role="tabpanel" class="tab-pane fade flipTab" id="adminAuctionTab">EDIT AUCTIONS</div>
+      <div role="tabpanel" class="tab-pane fade flipTab" id="adminPollTab">{{> editraffle}}</div>
+      <div role="tabpanel" class="tab-pane fade flipTab" id="adminItemTab">{{> edititems}}</div>
+    </div>
+  </div>
+  {{/if}}
+</template>

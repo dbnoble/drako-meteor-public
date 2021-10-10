@@ -1,0 +1,16 @@
+<template name="drakoDraws">
+    <div class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog drako-draws-dialog">
+            <div class="modal-content drako-draws-content">
+                <div class="modal-body drako-draws">
+                    <p>Please draw...</p>
+                  <textarea id="drawSubmission" placeholder='the first thing that comes to mind when you think of me (or click here to type something else)'></textarea>
+                  <p>Sincerely yours,</p>
+                  <p style="font-size:32px;">{{currentUser.profile.display_name}}</p>
+                  <img src="/waxstamp.png" class="waxStamp">
+                  <div class="waxMark"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
