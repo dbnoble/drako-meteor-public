@@ -51,7 +51,7 @@ ServiceConfiguration.configurations.upsert(
               user.profile.display_name= user.services.twitch.display_name;
               try {
                 console.log('checking sub status');
-                 var result = HTTP.call("GET", 'https://api.twitch.tv/kraken/channels/drako_gaming/subscriptions/' + user.name + '?oauth_token=' + twitchClientIdPersistent + '&client_id=' + twitchClientIdPersistent);
+                 var result = HTTP.call("GET", 'https://api.twitch.tv/kraken/channels/drako_gaming/subscriptions/' + user.name + '?oauth_token=' + twitchSecretPersistent + '&client_id=' + twitchClientIdPersistent);
                  user.subbed = true;
                  console.log(user.name + ' is a sub!');
                   } catch (e) {
